@@ -141,8 +141,27 @@ class Overload {
 		System.out.println("Два вещественных параметра: " + a + " " + b);
 		return a+b;
 	}
+	//Метод для демонстрации в классе Pr012 перегрузки методов при автоматическом преобразовании типов
+	void ovlDemo2(int x) {
+		System.out.println("Вызван метод ovlDemo2(int): " + x);
+	}
+	void ovlDemo2(double x) {
+		System.out.println("Вызван метод ovlDemo2(double): " + x);
+	}
+	void ovlDemo2(byte x) {
+		System.out.println("Вызван метод ovlDemo2(byte): " + x);
+	}
 }
 class Square {
+	int w, h;
+	double R;
+	String type;
+	
+	Square() {
+		w = h = 0;
+		R = 0.0;
+		type = "Неопределённая фигура";
+	}
 	//вычисление площади квадрата 
 	int square(int a) {
 		System.out.println("Площадь квадрата со стороной " + a + " равна " + a*a);
@@ -158,6 +177,43 @@ class Square {
 		System.out.println("Площадь прямоугольника со сторонами " + a + " и " + b + " равна " + a*b);
 		return a*b;
 	}
+}
+class Overload2 {
+	//пример перезагрузки конструкторов
+	int x;
+	Overload2() {
+		System.out.println("Выполняется конструктор Overload2()");
+		x = 0;
+	}
+
+	Overload2(int i) {
+		System.out.println("Выполняется конструктор Overload2(int)");
+		x = i;
+	}
+
+	Overload2(double d) {
+		System.out.println("Выполняется конструктор Overload2(double)");
+		x = (int) d;
+	}
+
+	Overload2(int i, int j) {
+		System.out.println("Выполняется конструктор Overload2(int, int)");
+		x = i + j;
+	}
+}
+class Summation {
+	//демонстрация создания одного объекта при помощи передачи конструкторную уже существующего объекта
+	int sum;
+
+	Summation(int num) {
+		sum = 0;
+		for(int i=1; i<num; i++)
+			sum += i;
+	}
+
+	Summation(Summation ob) {
+		sum = ob.sum
+	} 
 }
 class Pr012 {
 	public static void main(String arg[]) {
@@ -255,5 +311,42 @@ class Pr012 {
 		//Вычисление площади круга с радиусом 3.0
 	        double S_ocr = ob5.square(3.0);	
 
+		//Демонстрация автоматического преобразования типов при перегрузке метода ovlDemo2()
+		System.out.println();
+		int i1 = 5;
+		double d1 = 10.1;
+		byte b1 = 7;
+		short s1 = 9;
+		float f1 = 12.1F;
+
+		ob4.ovlDemo2(i1);
+		ob4.ovlDemo2(d1);
+		ob4.ovlDemo2(b1);
+		ob4.ovlDemo2(s1);
+		ob4.ovlDemo2(f1);
+
+		//Демонстрация перегрузки конструкторов
+		System.out.println();
+		Overload2 ob9 = new Overload2();
+		Overload2 ob6 = new Overload2(100);
+		Overload2 ob7 = new Overload2(22.3);
+		Overload2 ob8 = new Overload2(2, 8);
+
+		System.out.println("ob9.x " + ob9.x);
+		System.out.println("ob6.x " + ob6.x);
+		System.out.println("ob7.x " + ob7.x);
+		System.out.println("ob8.x " + ob8.x);
+
+		//Демонстрация создания объекта на базе существующего объекта
+		System.out.println();
+		Summation s3 = new Summation(10);
+		Summation s2 = new Summation(s3);
+
+		System.out.println("s3.sum " + s3.sum);
+		System.out.println("s2.sum " + s2.sum);
+
+		//Демонстрация работы по созданию различных объектов Square
+		Square figure1 = new Square();
+		System.out.println("\nТип фигуры: " + figure1.type);
 	}
 }
