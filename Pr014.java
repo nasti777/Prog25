@@ -27,7 +27,7 @@ class Outer {
       return m;
     }
     int avg() {
-      int m = nums[0];
+      int a = nums[0];
       for(int i = 1; i < nums.length; i++)
         a += nums[i];
       return a/nums.length;
@@ -70,7 +70,7 @@ class VarArgs {
       System.out.println(" аргумент " + i + ": " + v[i]);
     System.out.println();
   }
-   static void vaTest3(String msg ... v) {
+   static void vaTest3(String msg int... v) {
     System.out.println("vaTest3(String, int ...): " + msg + v.length);
     System.out.println("Содержимое: ");
 
@@ -117,7 +117,7 @@ class Pr014 {
         numbits = n;
       }
 
-      void show(lond val) {
+      void show(long val) {
         long mask = 1;
         //Сдвиг значения 1 на нужную позицию
         mask <<= numbits-1;
