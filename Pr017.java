@@ -85,7 +85,9 @@ class Triangle extends TwoDShape {
 		super(w, h, c);
 		style = s;
 	}
+	//Создание треугольника на базе существующего объекта (копия объекта)
 	Triangle(Triangle ob) {
+		//Вызов конструктора суперкласса с передачей объекта "Треугольник"
 		super(ob);
 		style = ob.style;
 	}
@@ -135,6 +137,51 @@ class Rectangle extends TwoDShape {
 		return color;
 	}
 	*/
+}
+class F {
+	int i, j;
+	F(int a, int b) {
+		i = a;
+		j = b;
+	}
+	void show() {
+		System.out.println("Метод show(), запущенный из класса F");
+		System.out.println("i и j " + i + " " + j);
+	}
+}
+class G extends F {
+	int k;
+	G(int a, int b, int c) {
+		super(a, b);
+		k = c;
+	}
+	//Перегрузка метода, определённого в супеклассе
+	void show(String msg) {
+		System.out.println(msg + k);
+	}
+	//Переопределени метода, определённого в суперклассе
+	void show() {
+		//Есть возможность вызвать метод суперкласса при помощи ключевог слова super
+		super.show();
+		//Дополнительные действия, выполняемые переопределённым методом
+		System.out.println("Метод show(), запущенный из класса G")
+		System.out.println("k: " + k);
+	}
+}
+class SuperClass {
+	void who() {
+		System.out.println("Метод who(), вызванный из суперкласса");
+	}
+}
+class SubClass1 extends SuperClass {
+	void who() {
+		System.out.println("Метод who(), вызванный из подкласса 1");
+	}
+}
+class SubClass2 extends SuperClass {
+	void who() {
+		System.out.println("Метод who(), вызванный из подкласса 2");
+	}
 }
 class Pr017 {
 	//Демонстрация создания треугольников и двумерных фигур
@@ -230,6 +277,7 @@ class Pr017 {
 		System.out.println("Значение i в экземпляре Triangle: " + t1.i);
 		t1.showI();
 
+		//Создание треугольника t4 на базе треугольника t1
 		Triangle t4 = new Triangle(t1);
 
 		System.out.println("Информация об объекте t4: ");
@@ -238,5 +286,34 @@ class Pr017 {
 		System.out.println("Площадь: " +  t4.area());
 		System.out.println();
 
+		//Демонстрация переопределения методов (override)
+		F f = new F(5,10);
+		G g = new G(10,15,20);
+		f.show();
+		//Вызов переопределеного метода из объекта класса G
+		System.out.println("\nВызов метода show() из подкласса");
+		g.show();
+		//Вызов перегружаемого метода
+		System.out.println("\nПерегружаемый метод класса G");
+		g.show("Вызов метода с параметром типа String ");
+
+		//Демонстрация динамической диспетчеризации методов
+		SuperClass superOb = new SuperClass();
+		SubClass1 subOb1 = new SubClass1();
+		SubClass2 subOb2 = new SubClass2();
+
+		SuperClass supRef;
+
+		//Присваиваем переменной supRef ссылку на объект типа SuperClass
+		supRef = superOb;
+		supRef.who();
+
+		//Присваиваем переменной supRef ссылку на объект типа SubClass1
+		supRef = subOb1;
+		supRef.who();
+
+		//Присваиваем переменной supRef ссылку на объект типа SubClass2
+		supRef = subOb2;
+		supRef.who();
 	}
 }
