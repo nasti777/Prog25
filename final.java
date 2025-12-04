@@ -1,7 +1,3 @@
-A a = new A();
-B b = new B();
-a = b
-a.meth()
 class A {
     void meth() {
         System.out.println("Метод meth() класса А");
@@ -18,13 +14,6 @@ class B extends A {
 	//void meth2() {
 	//	System.out.println("Метод не допускает переопределение в подклассах");
 }
-b = new B()
-a = b
-a.meth()
-b = new B()
-a = b
-a.meth()
-a.meth2()
 final class C {
     int i = 10;
 }
@@ -46,4 +35,3 @@ class ErrorMsg {
         return "Неизвестная ошибка";
     }
 }
-ErrorMsg err = new ErrorMsg();
